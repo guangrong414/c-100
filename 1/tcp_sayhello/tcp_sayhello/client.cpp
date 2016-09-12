@@ -44,54 +44,59 @@ int main()
 
 	while ( 1 ) //------>while.cond-2016.8.24.13.36.40
 	{//----------------------------------------------->while.start-2016.8.24.13.36.40
-		memset(msg, 0, sizeof(msg));
-		while(-1 == (ret = read(cli_socket, msg, sizeof(msg))))
-		{
-			if(errno == EAGAIN)
-			{
-				sleep(1);
-				printf("socket:%d, recv waiting...\n",cli_socket);
-				continue;
-			}
-			//s 连接套接字失效
-			//s 套接字 无效，重现建立通道
-			else if(errno == EBADF || errno == ENOTSOCK)
-			{
-
-			}
-			//对端拒绝连接，对端服务停止，重建连接通道
-			else if(errno == ECONNREFUSED )
-			{
-
-			}
-			//接收buf的指针指向了进程外的空间（程序异常），守护进程重启程序，记录日志。
-			else if(errno == EFAULT )
-			{
-
-			}
-			//接收到中断信号，程序停止控制
-			else if(errno ==  EINTR )
-			{
-
-			}
-			//传入参数无效，检查程序，程序停止控制，记录日志
-			else if(errno == EINVAL )
-			{
-
-			}
-			//内存无法创建， 程序停止控制，记录日志
-			else if(errno == ENOMEM )
-			{
-
-			}
-
-		}
-
-		printf("recv server say:%s\n", msg);
-
 		char* resqmsg = "thank you!";
 		write(cli_socket, resqmsg, strlen(resqmsg));
 		printf("send server msg:%s\n", resqmsg);
+		
+		
+		memset(msg, 0, sizeof(msg));
+		read(cli_socket, msg, sizeof(msg));
+		printf("recv server say:%s\n", msg);
+		//while(-1 == (ret = read(cli_socket, msg, sizeof(msg))))
+		//{
+		//	if(errno == EAGAIN)
+		//	{
+		//		sleep(1);
+		//		printf("socket:%d, recv waiting...\n",cli_socket);
+		//		continue;
+		//	}
+		//	//s 连接套接字失效
+		//	//s 套接字 无效，重现建立通道
+		//	else if(errno == EBADF || errno == ENOTSOCK)
+		//	{
+
+		//	}
+		//	//对端拒绝连接，对端服务停止，重建连接通道
+		//	else if(errno == ECONNREFUSED )
+		//	{
+
+		//	}
+		//	//接收buf的指针指向了进程外的空间（程序异常），守护进程重启程序，记录日志。
+		//	else if(errno == EFAULT )
+		//	{
+
+		//	}
+		//	//接收到中断信号，程序停止控制
+		//	else if(errno ==  EINTR )
+		//	{
+
+		//	}
+		//	//传入参数无效，检查程序，程序停止控制，记录日志
+		//	else if(errno == EINVAL )
+		//	{
+
+		//	}
+		//	//内存无法创建， 程序停止控制，记录日志
+		//	else if(errno == ENOMEM )
+		//	{
+
+		//	}
+
+		//}
+
+		//printf("recv server say:%s\n", msg);
+
+
 	}//----------------------------------------------->while.end-2016.8.24.13.36.40
 	
 	return 0;

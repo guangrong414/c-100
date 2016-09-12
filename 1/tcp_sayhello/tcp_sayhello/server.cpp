@@ -79,31 +79,39 @@ void * work(void* arg )
 	//·¢ËÍÊý¾Ý
 	while(1)
 	{
-			while(-1 == (ret = write(clifd, pWelcome, strlen(pWelcome)+1)))
-			{
-				if(errno == EAGAIN || errno ==  EWOULDBLOCK)
-				{
-					sleep(1);
-					printf("socket:%d, send waiting\n", clifd);
-					continue;
-				}
-				/*else if(errno ==  ECONNRESET)
-				{
-				printf("socket:%d, send waiting\n", clifd);
-				}*/
-			}
-			printf("send client %d resquest:%s\n",clifd, pWelcome);
-			memset(msg, 0, sizeof(msg));
-			while(-1 == (ret = read(clifd, msg, sizeof(msg))))
-			{
-				if(errno == EAGAIN || errno ==  EWOULDBLOCK)
-				{
-					sleep(1);
-					printf("socket:%d, send waiting\n", clifd);
-					continue;
-				}
-			}
-			printf("recv client %d resquest:%s\n",clifd, msg);
+			//while(-1 == (ret = write(clifd, pWelcome, strlen(pWelcome)+1)))
+			//{
+			//	if(errno == EAGAIN || errno ==  EWOULDBLOCK)
+			//	{
+			//		sleep(1);
+			//		printf("socket:%d, send waiting\n", clifd);
+			//		continue;
+			//	}
+			//	/*else if(errno ==  ECONNRESET)
+			//	{
+			//	printf("socket:%d, send waiting\n", clifd);
+			//	}*/
+			//}
+			//printf("send client %d resquest:%s\n",clifd, pWelcome);
+			//memset(msg, 0, sizeof(msg));
+			//while(-1 == (ret = read(clifd, msg, sizeof(msg))))
+			//{
+			//	if(errno == EAGAIN || errno ==  EWOULDBLOCK)
+			//	{
+			//		sleep(1);
+			//		printf("socket:%d, send waiting\n", clifd);
+			//		continue;
+			//	}
+			//}
+			//printf("recv client %d resquest:%s\n",clifd, msg);
+
+		read(clifd, msg, sizeof(msg));
+		printf("recv client %d resquest:%s\n",clifd, msg);
+
+		write(clifd, pWelcome, strlen(pWelcome));
+		printf("send client %d resquest:%s\n",clifd, pWelcome);
+
+
 	}
 
 
